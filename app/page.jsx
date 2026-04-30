@@ -5,6 +5,9 @@
 // - Ubah urutan komponen atau teks default; modifikasi cara fetch jika ingin SSR/CSR berbeda.
 
 import React from 'react';
+
+// [CONFIG] Jangan prerender halaman utama pada build; jalankan secara dynamic di server
+export const dynamic = 'force-dynamic';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import PortfolioGrid from '../components/PortfolioGrid';
@@ -15,7 +18,11 @@ import PortfolioGrid from '../components/PortfolioGrid';
   - Default limit = 5. Ubah query `?limit=` untuk menyesuaikan.
 */
 async function getProjects(limit = 5) {
-  const res = await fetch(`/api/projects?limit=${limit}`, { cache: 'no-store' });
+  // [FUNGSI: getProjects] - gunakan URL absolut saat build/prerender
+  // Pada environment build, fetch relatif dapat menyebabkan error "Invalid URL",
+  // jadi gunakan `NEXT_PUBLIC_BASE_URL` jika tersedia, atau fallback ke localhost.
+  const base = (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000').trim();
+  const res = await fetch(`${base}/api/projects?limit=${limit}`, { cache: 'no-store' });
   if (!res.ok) return [];
   const json = await res.json();
   return json.projects || [];
