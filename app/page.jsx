@@ -6,31 +6,17 @@
 
 import React from 'react';
 
-// [CONFIG] Jangan prerender halaman utama pada build; jalankan secara dynamic di server
-export const dynamic = 'force-dynamic';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import PortfolioGrid from '../components/PortfolioGrid';
+import projects from '../data/projects.json';
 
 /*
-  [FUNGSI: getProjects]
-  - Memanggil endpoint API `app/api/projects` untuk mengambil daftar proyek.
-  - Default limit = 5. Ubah query `?limit=` untuk menyesuaikan.
+  [CATATAN] Halaman utama sekarang menggunakan data statis dari `data/projects.json`.
+  Ini membuat website dapat live tanpa konfigurasi MongoDB.
 */
-async function getProjects(limit = 5) {
-  // [FUNGSI: getProjects] - gunakan URL absolut saat build/prerender
-  // Pada environment build, fetch relatif dapat menyebabkan error "Invalid URL",
-  // jadi gunakan `NEXT_PUBLIC_BASE_URL` jika tersedia, atau fallback ke localhost.
-  const base = (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000').trim();
-  const res = await fetch(`${base}/api/projects?limit=${limit}`, { cache: 'no-store' });
-  if (!res.ok) return [];
-  const json = await res.json();
-  return json.projects || [];
-}
 
-export default async function Page() {
-  const projects = await getProjects(6);
-
+export default function Page() {
   return (
     <div>
       <Hero />

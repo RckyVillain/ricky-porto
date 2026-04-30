@@ -22,9 +22,10 @@ npm run dev
 
 Deploy ke Vercel:
 - Login ke Vercel, import project dari GitHub (atau upload manual).
-- Tambahkan Environment Variable `MONGODB_URI` pada Settings Project.
+- Tambahkan Environment Variable `MONGODB_URI` pada Settings Project jika ingin menyimpan data ke MongoDB.
+- Jika tidak pakai MongoDB, website tetap dapat live karena proyek menggunakan data statis sebagai fallback.
 - Build command: `npm run build`, Output dir: (default). Vercel mendeteksi Next.js otomatis.
 
 Catatan:
 - Ganti file `public/profile.svg` dengan foto asli Anda (`public/profile.svg` atau ubah path di `Hero.jsx`).
-- Semua file API ada di `app/api/*` dan menggunakan `lib/mongoose.js` untuk koneksi MongoDB.
+- Semua file API ada di `app/api/*`. `app/api/projects` dapat menggunakan MongoDB jika tersedia, atau fallback ke data statis.

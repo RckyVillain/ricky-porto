@@ -15,10 +15,28 @@
 import { NextResponse } from 'next/server';
 import connectMongo from '../../../lib/mongoose';
 import Project from '../../../models/Project';
+import staticProjects from '../../../data/projects.json';
+
+const useStatic = !process.env.MONGODB_URI;
+
+function getStaticProjects(limit) {
+  return staticProjects.slice(0, limit).map((project) => ({
+    ...project,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }));
+}
 
 // [FUNGSI: handler GET] - Mengambil daftar proyek. Query optional: ?limit=5
 export async function GET(request) {
   try {
+    if (useStatic) {
+      const url = new URL(request.url);
+      const limit = parseInt(url.searchParams.get('limit') || '5', 10);
+      const projects = getStaticProjects(limit);
+      return NextResponse.json({ success: true, count: projects.length, projects });
+    }
+
     // Menghubungkan ke DB (cached untuk serverless)
     await connectMongo();
 
@@ -40,6 +58,13 @@ export async function GET(request) {
 
 // [FUNGSI: handler POST] - Membuat proyek baru
 export async function POST(request) {
+  if (useStatic) {
+    return NextResponse.json(
+      { success: false, error: 'MongoDB tidak dikonfigurasi. Gunakan data statis atau atur MONGODB_URI.' },
+      { status: 501 }
+    );
+  }
+
   try {
     await connectMongo();
 
@@ -65,6 +90,13 @@ export async function POST(request) {
 
 // [FUNGSI: handler PUT] - Mengupdate proyek berdasarkan `id` pada body
 export async function PUT(request) {
+  if (useStatic) {
+    return NextResponse.json(
+      { success: false, error: 'MongoDB tidak dikonfigurasi. Gunakan data statis atau atur MONGODB_URI.' },
+      { status: 501 }
+    );
+  }
+
   try {
     await connectMongo();
     const body = await request.json();
@@ -88,6 +120,13 @@ export async function PUT(request) {
 
 // [FUNGSI: handler DELETE] - Menghapus proyek berdasarkan query `?id=` atau body.id
 export async function DELETE(request) {
+  if (useStatic) {
+    return NextResponse.json(
+      { success: false, error: 'MongoDB tidak dikonfigurasi. Gunakan data statis atau atur MONGODB_URI.' },
+      { status: 501 }
+    );
+  }
+
   try {
     await connectMongo();
 

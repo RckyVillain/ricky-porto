@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Wedding Highlight - Mager Cinematic",
+    "description": "Video highlight pernikahan cinematic dengan storytelling dan sinematografi estetis.",
+    "category": "video",
+    "media": [
+      { "url": "/profile.svg", "mimeType": "image/svg+xml", "caption": "Wedding Highlight" }
+    ],
+    "tags": ["wedding", "highlight", "video"],
+    "projectUrl": "",
+    "isFeatured": true
+  },
+  {
+    "title": "Low-Code Sales Dashboard",
+    "description": "Aplikasi low-code untuk tim sales dengan dashboard performa dan laporan realtime.",
+    "category": "aplikasi",
+    "media": [
+      { "url": "/profile.svg", "mimeType": "image/svg+xml", "caption": "Sales Dashboard" }
+    ],
+    "tags": ["low-code", "dashboard", "sales"],
+    "projectUrl": "",
+    "isFeatured": false
+  },
+  {
+    "title": "Portrait Photography - Surabaya",
+    "description": "Sesi fotografi portrait profesional untuk brand dan personal portfolio.",
+    "category": "fotografi",
+    "media": [
+      { "url": "/profile.svg", "mimeType": "image/svg+xml", "caption": "Portrait" }
+    ],
+    "tags": ["portrait", "photography"],
+    "projectUrl": "",
+    "isFeatured": false
+  },
+  {
+    "title": "Promo Video Content",
+    "description": "Video promosi kreatif untuk bisnis lokal dengan pendekatan storytelling.",
+    "category": "video",
+    "media": [
+      { "url": "/profile.svg", "mimeType": "image/svg+xml", "caption": "Promo Video" }
+    ],
+    "tags": ["promo", "video", "branding"],
+    "projectUrl": "",
+    "isFeatured": false
+  }
+]
