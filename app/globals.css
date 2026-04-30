@@ -1,0 +1,15 @@
+/* File: app/globals.css
+   Tujuan file:
+   - Meng-import directive Tailwind dan gaya global.
+   Apa yang boleh Anda ubah:
+   - Tambahkan overrides CSS di bagian bawah jika ingin kustom styling global.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Contoh override: body background untuk dark mode */
+html, body {
+  height: 100%;
+}
